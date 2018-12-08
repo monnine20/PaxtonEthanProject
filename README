@@ -1,0 +1,3 @@
+Use this command to download the python twitch client library
+
+pip3 install python-twitch-client
