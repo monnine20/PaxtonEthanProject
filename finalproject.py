@@ -3,6 +3,7 @@
 #different queries to manipualte the data into something more meaningful
 from twitch import TwitchClient
 
+#Grabs twitch client object
 client = TwitchClient(client_id='s81q68ulo4c8y5s9iqvobsole69ck9')
 
 #Gets top 100 games
@@ -38,6 +39,8 @@ for i in range(0,len(games)):
 	ratioc = gamestreams / totalStreams * 100
 	ratioc = round(ratioc, 2)
 	ratio_dict[gameid] = {str(ratiov) + '%' + " of viewers", str(ratioc) + "%" + " of streams"}
+print("\nratio_dict:")
+print(ratio_dict)
 
 #2
 #This next section will compare the top 100 games in Videos/Streams/Clips in each category
@@ -87,6 +90,8 @@ for name in allNames:
 	top100compare[name] = {checkvalid(name,videoDict) + " videos", 
 							checkvalid(name,clipDict) + " clips", 
 							checkvalid(name,streamDict) + " streams"}
+print("\ntop100compare:")
+print(top100compare)
 
 #3
 #This next session will take the 100 streams and clips and return a list of people who
@@ -116,6 +121,8 @@ for name in allChannelNames:
 	if ((1 <= int(checkvalid(name,clipChannelCount))) and (1 <= int(checkvalid(name, videoChannelCount)))):
 		appearsmorethanonce[name] = {str(checkvalid(name,clipChannelCount)) + " Clips",
 									str(checkvalid(name,videoChannelCount)) + " videos"}
+print("\nappearsmorethanonce:")
+print(appearsmorethanonce)
 
 #4 part 1
 #This next section compare the up to 100 featured streams to the top 100 livestreams
@@ -137,6 +144,10 @@ for cursor in liveStreams:
 
 avgValStream = (totalViewersTopStreams / 100)
 avgValFeatured = (totalViewersFeatured / len(featured))
+print("\navgValStream:")
+print(avgValStream)
+print("\navgValFeatured:")
+print(avgValFeatured)
 
 #4 part 2
 #this function takes two dictionaries and combines the total number of streams
@@ -174,7 +185,7 @@ def countViews(topStreamDict ,featuredDict):
 			returndict[cursor['game']] = int(cursor['viewers'])
 	return returndict
 
-#This function will output a tuple with
+#This function will output a list with
 #(# of streams with name, # of viewers on streams with game name, avg viewers with game name )
 def ComputesAvgList(totalG, totalV, names):
 	returndict = {}
@@ -189,3 +200,5 @@ totalGames = countNames(liveStreams,featured)
 totalViews = countViews(liveStreams,featured)
 nameList = condenseNames(totalGames,totalViews,{})
 gameinfodict = ComputesAvgList(totalGames,totalViews,nameList)
+print("\ngameinfodict:")
+print(gameinfodict)
