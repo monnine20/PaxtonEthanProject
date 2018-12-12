@@ -1,3 +1,4 @@
-Use this command to download the python twitch client library
+Use this command to install the python twitch client library from
+the python-twitch-client-master folder
 
 pip3 install python-twitch-client
